@@ -1,0 +1,25 @@
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gewicht</th>
+    <th>Superkraft</th>
+    <th>Ausgestorben seit</th>
+    <th>Aktionen</th>
+  </tr>
+  </thead>
+  <tbody>
+   @for(animal of animalData(); track animal.name) {
+     <tr>
+       <td>{{animal.name}}</td>
+       <td>{{animal.weight}}</td>
+       <td>{{animal.power}}</td>
+       <td>{{animal.extinct}}</td>
+       <td>
+         <app-button>Bearbeiten</app-button>
+         <app-button>Loeschen</app-button>
+       </td>
+     </tr>
+   }
+  </tbody>
+</table>

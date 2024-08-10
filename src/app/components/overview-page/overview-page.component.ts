@@ -26,4 +26,30 @@ export class OverviewPageComponent {
       (data) => this.data.set(data)
     )
   })
+
+  editAnimal(id: number): void {
+    if (id) {
+    this.animalService.editAnimal(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
+      (data) => {
+        const updatedData = this.data().filter(item => item.id !== data.id);
+        this.data.set(updatedData)
+      }
+    )
+    }
+  }
+
+  deleteAnimal(id: number): void {
+    console.log('id from parent', id)
+    this.animalService.deleteAnimal(id).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: () => {
+        const updatedData = this.data().filter(item => item.id !== id);
+        this.data.set(updatedData);
+      },
+      error: (err) => {
+        console.error('Failed to delete animal:', err);
+      }
+    });
+  }
+
+
 }

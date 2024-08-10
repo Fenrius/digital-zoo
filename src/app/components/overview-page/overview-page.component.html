@@ -1,2 +1,29 @@
 <app-button>+ Neu</app-button>
-<app-table [animalData]="data()"></app-table>
+<!--<app-table [animalData]="data()" (animalToDelete)="deleteAnimal($event)"></app-table>-->
+
+<table>
+  <thead>
+  <tr>
+    <th>Name</th>
+    <th>Gewicht</th>
+    <th>Superkraft</th>
+    <th>Ausgestorben seit</th>
+    <th>Aktionen</th>
+  </tr>
+  </thead>
+  <tbody>
+    @for(animal of data(); track animal.name) {
+      <tr>
+        <td>{{animal.name}}</td>
+        <td>{{animal.weight}}</td>
+        <td>{{animal.power}}</td>
+        <td>{{animal.extinction}}</td>
+        <td>
+          <!--<app-button (click)="editAnimal(animal.id)">Bearbeiten</app-button>-->
+          <app-button (click)="deleteAnimal(animal.id)">Löschen</app-button>
+        </td>
+      </tr>
+    }
+  </tbody>
+</table>
+

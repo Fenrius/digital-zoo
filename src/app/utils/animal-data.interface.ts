@@ -1,6 +1,7 @@
 export interface AnimalDataInterface {
+  id: number;
   name: string;
   weight: number;
   power: string;
-  extinct: string;
+  extinction: string;
 }

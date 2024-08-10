@@ -1,7 +1,9 @@
-import {Component, signal} from '@angular/core';
+import {Component, DestroyRef, effect, inject, signal} from '@angular/core';
 import {TableComponent} from "../table/table.component";
 import {AnimalDataInterface} from "../../utils/animal-data.interface";
 import {ButtonComponent} from "../button/button.component";
+import {AnimalsService} from "../../services/animals.service";
+import {takeUntilDestroyed} from "@angular/core/rxjs-interop";
 
 @Component({
   selector: 'app-overview-page',
@@ -14,9 +16,14 @@ import {ButtonComponent} from "../button/button.component";
   styleUrl: './overview-page.component.css'
 })
 export class OverviewPageComponent {
-  public animalData = signal<AnimalDataInterface[]>(
-    [
-    {name: 'Moonpie', weight: 2, power: 'Djukkedi pa', extinct: '2020'},
-    {name: 'Dodo', weight: 4.5, power: 'sitzen', extinct: 'langer Zeit'}
-  ]);
+  public readonly animalService = inject(AnimalsService);
+  public readonly destroyRef = inject(DestroyRef);
+
+  public data = signal<AnimalDataInterface[]>([]);
+
+  readonly getAnimals = effect(() => {
+    this.animalService.getAllAnimals().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
+      (data) => this.data.set(data)
+    )
+  })
 }

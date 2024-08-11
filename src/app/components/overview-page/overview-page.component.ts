@@ -63,10 +63,6 @@ export class OverviewPageComponent {
     this.isAddFormOpen = false;
   }
 
-  startEdit(id: number) {
-    this.editId = id;
-  }
-
   editAnimal(animal: AnimalDataInterface): void {
     this.animalService.editAnimal(animal).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (updated: AnimalDataInterface) => {

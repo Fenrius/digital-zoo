@@ -60,7 +60,7 @@
         </td>
         <td>
           @if (editId !== animal.id) {
-          <button (click)="startEdit(animal.id)" [disabled]="editId !== null">Bearbeiten</button>
+          <button (click)="editId = animal.id" [disabled]="editId !== null">Bearbeiten</button>
           }
           @if (editId === animal.id) {
           <button (click)="editAnimal(animal)">Speichern</button>

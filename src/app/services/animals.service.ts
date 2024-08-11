@@ -14,8 +14,12 @@ export class AnimalsService {
     return this.httpClient.get<AnimalDataInterface[]>(`${this.baseUrl}`)
   }
 
-  editAnimal(id: number) {
-    return this.httpClient.put<AnimalDataInterface>(`${this.baseUrl}${id}/`, this.getAllAnimals())
+  addAnimal(newAnimal: Omit<AnimalDataInterface, 'id'>) {
+    return this.httpClient.post<AnimalDataInterface>(`${this.baseUrl}`, newAnimal);
+  }
+
+  editAnimal(updatedAnimal: AnimalDataInterface) {
+    return this.httpClient.put<void>(`${this.baseUrl}${updatedAnimal.id}/`, updatedAnimal);
   }
 
   deleteAnimal(id: number) {

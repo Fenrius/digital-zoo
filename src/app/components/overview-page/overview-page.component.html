@@ -1,5 +1,21 @@
-<app-button>+ Neu</app-button>
+<app-button (click)="isAddFormOpen = true">Neuer Eintrag</app-button>
 <!--<app-table [animalData]="data()" (animalToDelete)="deleteAnimal($event)"></app-table>-->
+
+@if (isAddFormOpen) {
+  <form [formGroup]="animalForm" (ngSubmit)="addAnimal()">
+    <label for="name">Name</label>
+    <input type="text" id="name" placeholder="Name" formControlName="name">
+    <label for="weight">Gewicht</label>
+    <input type="number" id="weight" placeholder="Gewicht" formControlName="weight">
+    <label for="power">Superkraft</label>
+    <input type="text" id="power" placeholder="Superkraft" formControlName="power">
+    <label for="extinction">Ausgestorben seit</label>
+    <input type="text" id="extinction" placeholder="Ausgestorben seit" formControlName="extinction">
+
+    <button type="submit" [disabled]="!animalForm.valid">Hinzufügen</button>
+    <button (click)="isAddFormOpen = false">Schliessen</button>
+  </form>
+}
 
 <table>
   <thead>

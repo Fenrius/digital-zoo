@@ -51,9 +51,11 @@ export class OverviewPageComponent {
     this.animalService.addAnimal(animalData).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (createdAnimal) => {
         this.data.set([...this.data(), createdAnimal]);
+        alert('Erfolgreich hinzugefügt!')
       },
       error: (err) => {
         console.error('Failed to add animal:', err);
+        alert('Das Hinzugefügen hat nicht geklappt.')
       }
     });
 
@@ -64,6 +66,7 @@ export class OverviewPageComponent {
   startEdit(id: number) {
     this.editId = id;
   }
+
   editAnimal(animal: AnimalDataInterface): void {
     this.animalService.editAnimal(animal).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
       next: (updated: AnimalDataInterface) => {
@@ -72,9 +75,12 @@ export class OverviewPageComponent {
         this.data.set(updatedAnimals);
 
         this.editId = null;
+
+        alert('Das Bearbeiten hat geklappt!');
       },
       error: (err) => {
         console.error('Failed to update animal:', err);
+        alert('Das Bearbeiten hat nicht geklappt.')
       }
     });
   }
@@ -85,9 +91,11 @@ export class OverviewPageComponent {
       next: () => {
         const updatedData = this.data().filter(item => item.id !== id);
         this.data.set(updatedData);
+        alert('Das Löschen hat geklappt!');
       },
       error: (err) => {
         console.error('Failed to delete animal:', err);
+        alert('Das Löschen hat nicht geklappt.');
       }
     });
   }

@@ -19,7 +19,7 @@ export class AnimalsService {
   }
 
   editAnimal(updatedAnimal: AnimalDataInterface) {
-    return this.httpClient.put<void>(`${this.baseUrl}${updatedAnimal.id}/`, updatedAnimal);
+    return this.httpClient.put<AnimalDataInterface>(`${this.baseUrl}${updatedAnimal.id}/`, updatedAnimal);
   }
 
   deleteAnimal(id: number) {

@@ -25,6 +25,7 @@ export class OverviewPageComponent {
   public data = signal<AnimalDataInterface[]>([]);
 
   isAddFormOpen = false;
+  editId: number | null = null;
 
   readonly getAnimals = effect(() => {
     this.animalService.getAllAnimals().pipe(takeUntilDestroyed(this.destroyRef)).subscribe(
@@ -60,11 +61,17 @@ export class OverviewPageComponent {
     this.isAddFormOpen = false;
   }
 
-  editAnimal(updatedAnimal: AnimalDataInterface): void {
-    this.animalService.editAnimal(updatedAnimal).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
-      next: () => {
-        const updatedData = this.data().map(animal => animal.id === updatedAnimal.id ? updatedAnimal : animal);
-        this.data.set(updatedData);
+  startEdit(id: number) {
+    this.editId = id;
+  }
+  editAnimal(animal: AnimalDataInterface): void {
+    this.animalService.editAnimal(animal).pipe(takeUntilDestroyed(this.destroyRef)).subscribe({
+      next: (updated: AnimalDataInterface) => {
+        const updatedAnimals = this.data().map(animal =>
+          animal.id === updated.id ? updated : animal);
+        this.data.set(updatedAnimals);
+
+        this.editId = null;
       },
       error: (err) => {
         console.error('Failed to update animal:', err);

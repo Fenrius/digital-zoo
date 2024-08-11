@@ -13,7 +13,7 @@
     <input type="text" id="extinction" placeholder="Ausgestorben seit" formControlName="extinction">
 
     <button type="submit" [disabled]="!animalForm.valid">Hinzufügen</button>
-    <button (click)="isAddFormOpen = false">Schliessen</button>
+    <button (click)="isAddFormOpen = false">Abbrechen</button>
   </form>
 }
 
@@ -28,15 +28,45 @@
   </tr>
   </thead>
   <tbody>
-    @for(animal of data(); track animal.name) {
+    @for(animal of data(); track animal.id) {
       <tr>
-        <td>{{animal.name}}</td>
-        <td>{{animal.weight}}</td>
-        <td>{{animal.power}}</td>
-        <td>{{animal.extinction}}</td>
         <td>
-          <!--<app-button (click)="editAnimal(animal.id)">Bearbeiten</app-button>-->
-          <app-button (click)="deleteAnimal(animal.id)">Löschen</app-button>
+          @if (editId === animal.id) {
+            <input [(ngModel)]="animal.name">
+          } @else {
+            {{animal.name}}
+          }
+        </td>
+        <td>
+          @if (editId === animal.id) {
+            <input [(ngModel)]="animal.weight">
+          } @else {
+            {{animal.weight}}
+          }
+        </td>
+        <td>
+          @if (editId === animal.id) {
+            <input [(ngModel)]="animal.power">
+          } @else {
+            {{animal.power}}
+          }
+        </td>
+        <td>
+          @if (editId === animal.id) {
+            <input [(ngModel)]="animal.extinction">
+          } @else {
+            {{animal.extinction}}
+          }
+        </td>
+        <td>
+          @if (editId !== animal.id) {
+          <button (click)="startEdit(animal.id)" [disabled]="editId !== null">Bearbeiten</button>
+          }
+          @if (editId === animal.id) {
+          <button (click)="editAnimal(animal)">Speichern</button>
+          <button (click)="editId = null">Abbrechen</button>
+          }
+          <button (click)="deleteAnimal(animal.id)" [disabled]="editId !== null">Löschen</button>
         </td>
       </tr>
     }

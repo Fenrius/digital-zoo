@@ -1,0 +1,11 @@
+header {
+  padding-top: 0.5rem;
+  font-weight: bold;
+  font-size: 2rem;
+}
+footer {
+  bottom: 0;
+  height: 3rem;
+  position: absolute;
+  width: 100%;
+}

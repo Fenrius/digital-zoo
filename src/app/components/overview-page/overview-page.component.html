@@ -20,11 +20,11 @@
 <table>
   <thead>
   <tr>
-    <th>Name</th>
-    <th>Gewicht in kg</th>
-    <th>Superkraft</th>
-    <th>Ausgestorben seit</th>
-    <th>Aktionen</th>
+    <th class="thLeft">Name</th>
+    <th class="thInner">Gewicht in kg</th>
+    <th class="thInner">Superkraft</th>
+    <th class="thInner">Ausgestorben seit</th>
+    <th class="thRight">Aktionen</th>
   </tr>
   </thead>
   <tbody>
@@ -37,28 +37,28 @@
             {{animal.name}}
           }
         </td>
-        <td>
+        <td class="tdInner">
           @if (editId === animal.id) {
             <input [(ngModel)]="animal.weight">
           } @else {
             {{animal.weight}}
           }
         </td>
-        <td>
+        <td class="tdInner">
           @if (editId === animal.id) {
             <input [(ngModel)]="animal.power">
           } @else {
             {{animal.power}}
           }
         </td>
-        <td>
+        <td class="tdInner">
           @if (editId === animal.id) {
             <input [(ngModel)]="animal.extinction">
           } @else {
             {{animal.extinction}}
           }
         </td>
-        <td>
+        <td class="tdInner">
           @if (editId !== animal.id) {
           <button (click)="editId = animal.id" [disabled]="editId !== null">Bearbeiten</button>
           }
@@ -72,4 +72,3 @@
     }
   </tbody>
 </table>
-

@@ -1,0 +1,45 @@
+
+
+label{
+  margin-right: 0.5rem;
+  margin-left: 0.5rem;
+}
+input{
+border-radius: 0.3rem;
+}
+table {
+  margin: auto;
+  border-spacing: 0;
+}
+button {
+  margin: 0.5rem;
+  padding: 0.44rem 0.6rem;
+  background: white;
+  border: 1px solid darkgray;
+  border-radius: 0.3rem;
+}
+th {
+  border-bottom: 1px solid black;
+  padding: 1rem;
+  background: rgba(123, 225, 107, 0.2);
+}
+tr:nth-child(odd) {
+  background-color: #f4f9f0;
+}
+
+tr:nth-child(even) {
+  background-color: #fdfffc;
+}
+.thLeft{
+  border-top-left-radius: 0.5rem;
+}
+.thRight{
+  border-top-right-radius: 0.5rem;
+}
+.tdInner{
+  border-left: 1px solid black;
+}
+
+.thInner,.thRight {
+  border-left: 1px solid black;
+}
